@@ -18,12 +18,12 @@ public class UserController {
     private UserService userService;
 
     //UserRegister
-    @PostMapping("/users/register")//request body post gonderende bodysi olmasi ucun
-    public void registerUser(@RequestBody User user) {
+    @PostMapping("/users/register")
+    public void registerUser(@RequestBody User user) {//request body post gonderende bodysi olmasi ucun
         userService.saveUser(user);
     }
 
-    @PutMapping("/users/update")//request body post gonderende bodysi olmasi ucun
+    @PutMapping("/users/update")
     public void updateUser(@RequestBody User user) {
         userService.saveUser(user);
     }
@@ -43,6 +43,11 @@ public class UserController {
     @DeleteMapping("/user")
     public void deleteUser(@RequestBody User user){
         userService.deleteUser(user);
+    }
+
+    @DeleteMapping("/users")
+    public void deleteUser(){
+        userService.deleteAllUsers();
     }
 
 

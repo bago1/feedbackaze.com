@@ -33,4 +33,8 @@ return userRepo.findAll();
     ) {
         userRepo.delete(user);
     }
+
+    public void deleteAllUsers() {
+        userRepo.deleteAll();
+    }
 }
