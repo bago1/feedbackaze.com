@@ -1,5 +1,6 @@
 package com.feedback.website.controllers;
 
+import com.feedback.website.models.Comment;
 import com.feedback.website.models.User;
 import com.feedback.website.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
