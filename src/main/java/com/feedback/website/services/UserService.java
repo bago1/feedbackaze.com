@@ -1,10 +1,12 @@
 package com.feedback.website.services;
 
+import com.feedback.website.dtos.CommentDto;
 import com.feedback.website.dtos.UserDto;
 import com.feedback.website.mappers.UserMapper;
 import com.feedback.website.models.Comment;
 import com.feedback.website.models.User;
 import com.feedback.website.repos.UserRepo;
+import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.mapstruct.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,46 +28,27 @@ public class UserService {
     @Autowired
     private CommentService commentService;
 
-    //list
-    public List<User> listUsers() {
-        return userRepo.findAll();
-    }
 
     //listCorrect
-    public List<UserDto> listUsersCorrect() {
+    public List<UserDto> listUsers() {
         return userMapper.entityListToDtoList(userRepo.findAll());
-    }
-
-
-    public void saveSampleUser() {
-
-
-        Comment comment = new Comment();
-        comment.setCommentText(" test comment text");
-        commentService.saveComment(comment);
-
-        User user = new User();
-        user.setName("test username");
-        user.setPassword("test userpass");
-        user.setEmail("test useremail");
-
-        comment.setUser(user);
-
-        userRepo.save(user);
     }
 
 
     public void saveUser(UserDto userDto) {
 
-        User user = new User();
-        user.setName(userDto.getAd());
-        user.setEmail(userDto.getEmail());
-        user.setPassword(userDto.getPassword());
+        UserDto userDto1 = new UserDto();
+        userDto1.setAd(userDto.getAd());
+        userDto1.setSoyad(userDto.getSoyad());
+        userDto1.setEmail(userDto.getEmail());
+        userDto1.setPassword(userDto.getPassword());
 
-        userRepo.save(user);
+        userRepo.save(userMapper.dtoToEntity(userDto1));
+
 
 
     }
+
 
     public void deleteUser(User user) {
         userRepo.delete(user);

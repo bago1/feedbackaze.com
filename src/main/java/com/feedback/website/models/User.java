@@ -9,21 +9,41 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Table(name = "users")
-@FieldDefaults(level = AccessLevel.PRIVATE)
-public class User extends Person{
+public class User extends Person {
     @Column(name = "email")
-    String email;
+    private String email;
 
     @Column(name = "password")
-    String password;
+    private String password;
 
-        @OneToMany(mappedBy = "user")//todo fetch = fetchType hem eager ve lazy yazanda da
-    //@JsonManagedReference
-    List<Comment> comments;
+    @OneToMany(mappedBy = "user")
+    private List<Comment> comments;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
 }
 

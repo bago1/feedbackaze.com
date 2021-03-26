@@ -17,27 +17,19 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
-    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
 
 
-
-
-    @GetMapping(value = "/list")
-    public List<User> getOwners() {
+    @GetMapping(value = "/users")
+    public List<UserDto> getAllUsers() {
         return userService.listUsers();
     }
 
-    @GetMapping(value = "/listCorrect")
-    public List<UserDto> getOwnersCorrect() {
-        return userService.listUsersCorrect();
-    }
-
-    @GetMapping(value = "/add")
-    public List<UserDto> addUser() {
-        userService.saveSampleUser();
-        logger.info("new user added");
-        return userService.listUsersCorrect();
+    @PostMapping(value = "/registerUser")
+    public List<UserDto> addUser(@RequestBody UserDto userDto) {
+        System.out.println("ss");
+        userService.saveUser(userDto);
+        return userService.listUsers();
     }
 
 
