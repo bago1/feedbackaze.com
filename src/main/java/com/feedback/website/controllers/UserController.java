@@ -1,69 +1,44 @@
 package com.feedback.website.controllers;
 
+import com.feedback.website.dtos.UserDto;
 import com.feedback.website.models.Comment;
 import com.feedback.website.models.User;
 import com.feedback.website.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+import lombok.Builder;
+import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
+@RequiredArgsConstructor
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
-    //UserRegister
-    @PostMapping("/users/register")
-    public void registerUser(@RequestBody User user) {//request body post gonderende bodysi olmasi ucun
-        userService.saveUser(user);
+
+
+
+
+    @GetMapping(value = "/list")
+    public List<User> getOwners() {
+        return userService.listUsers();
     }
 
-    @PutMapping("/users/update")
-    public void updateUser(@RequestBody User user) {
-        userService.saveUser(user);
+    @GetMapping(value = "/listCorrect")
+    public List<UserDto> getOwnersCorrect() {
+        return userService.listUsersCorrect();
     }
 
-
-    @GetMapping("/user")
-    public Optional<User> getUserById(Integer id) {
-        System.out.println(id);
-        return userService.getById(id);
+    @GetMapping(value = "/add")
+    public List<UserDto> addUser() {
+        userService.saveSampleUser();
+        logger.info("new user added");
+        return userService.listUsersCorrect();
     }
-
-    @GetMapping("/users")
-    public List<User> getallUsers() {
-        return userService.getAllUsers();
-    }
-
-    @DeleteMapping("/user")
-    public void deleteUser(@RequestBody User user){
-        userService.deleteUser(user);
-    }
-
-    @DeleteMapping("/users")
-    public void deleteUser(){
-        userService.deleteAllUsers();
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

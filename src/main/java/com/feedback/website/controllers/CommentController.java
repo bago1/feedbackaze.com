@@ -1,5 +1,9 @@
 package com.feedback.website.controllers;
 
+import com.feedback.website.dtos.CommentDto;
+import com.feedback.website.dtos.UserDto;
+import com.feedback.website.mappers.CommentMapper;
+import com.feedback.website.mappers.UserMapper;
 import com.feedback.website.models.Comment;
 import com.feedback.website.models.User;
 import com.feedback.website.services.CommentService;
@@ -18,6 +22,9 @@ public class CommentController {
     @Autowired
     CommentService commentService;
 
+    @Autowired
+    private CommentMapper commentMapper;
+
     @GetMapping("/comments")
     public List<Comment> getComments(){
         return commentService.getAll();
@@ -28,7 +35,6 @@ public class CommentController {
         return commentService.findById(id);
     }
 
-    /*Todo: burda url sadece comments ola biler. bele ki GET comments olarsa comentleri qaytarir. POST commentdirse comment store edir, delete silir mentiqi ile :) */
     @PostMapping("/comments/create")
     public void saveComment(@RequestBody Comment comment){
         commentService.saveComment(comment);
@@ -55,11 +61,15 @@ public class CommentController {
 
     /*User based comments */
     @GetMapping("/comments/{id}/user")
-    public User getUserOfComment(@PathVariable Integer id){
+    public CommentDto getUserOfComment(@PathVariable Integer id){
+
+
         Optional<Comment> comment = commentService.findById(id);
+
         if (comment.isPresent()){
             Comment newComment = comment.get();
-            return newComment.getUser();
+            return  commentMapper.entityToDto(newComment);
+
         }
         return null;
     }

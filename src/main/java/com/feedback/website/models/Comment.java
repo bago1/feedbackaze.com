@@ -12,14 +12,12 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+//@Table(name = "comments")
 public class Comment {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)  //todo generationtype auto, identity, sequence ferlqeri nedi
     Integer id;
-
-    @Column(name = "user_id")
-    Integer userId;
 
     @Column(name = "comment_text")
     String commentText;
@@ -28,7 +26,6 @@ public class Comment {
     Integer targetId;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", updatable = false, insertable = false)
-    @JsonBackReference
+    @JoinColumn
     private User user;
 }
