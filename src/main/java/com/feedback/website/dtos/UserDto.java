@@ -5,9 +5,10 @@ import lombok.*;
 
 import java.util.List;
 
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class UserDto {
 
     public String ad;
