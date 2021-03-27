@@ -1,20 +1,14 @@
 package com.feedback.website.services;
 
-import com.feedback.website.dtos.CommentDto;
 import com.feedback.website.dtos.UserDto;
 import com.feedback.website.mappers.UserMapper;
-import com.feedback.website.models.Comment;
 import com.feedback.website.models.User;
 import com.feedback.website.repos.UserRepo;
-import lombok.Builder;
 import lombok.RequiredArgsConstructor;
-import org.mapstruct.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -37,14 +31,14 @@ public class UserService {
 
     public void saveUser(UserDto userDto) {
 
-        UserDto userDto1 = new UserDto();
-        userDto1.setAd(userDto.getAd());
-        userDto1.setSoyad(userDto.getSoyad());
-        userDto1.setEmail(userDto.getEmail());
-        userDto1.setPassword(userDto.getPassword());
+        UserDto userDto1 = UserDto.builder()
+                .email(userDto.getEmail())
+                .password(userDto.getPassword())
+                .ad(userDto.getAd())
+                .soyad(userDto.getSoyad())
+                .build();
 
         userRepo.save(userMapper.dtoToEntity(userDto1));
-
 
 
     }
@@ -59,6 +53,11 @@ public class UserService {
     }
 
 
+    public UserDto getOneUser(int id) {
+
+        return userMapper.entityToDto(userRepo.findById(id).orElse(null));
+        //todo try catch - message
+    }
 }
 //list
 //[{"id":1,"name":"i am test user name",

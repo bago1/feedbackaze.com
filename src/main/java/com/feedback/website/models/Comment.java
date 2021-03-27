@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-//@Table(name = "comments")
+@Table(name = "comments")
 public class Comment {
 
     @Id
@@ -26,6 +26,6 @@ public class Comment {
     Integer targetId;
 
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(updatable = false,insertable = false)
     private User user;
 }

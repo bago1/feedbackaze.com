@@ -14,10 +14,8 @@ import lombok.NoArgsConstructor;
 public class CommentDto {
 
     Integer id;
-  //  Integer userId;
     String commentText;
     Integer targetId;
     User user;
-
 
 }
