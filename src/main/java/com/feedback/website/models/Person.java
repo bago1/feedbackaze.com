@@ -3,6 +3,7 @@ package com.feedback.website.models;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;

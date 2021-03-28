@@ -1,6 +1,7 @@
 package com.feedback.website.models;
 
 import lombok.*;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @Table(name = "users")
 @Builder
+@ToString
 public class User extends Person {
     @Column(name = "email")
     private String email;
