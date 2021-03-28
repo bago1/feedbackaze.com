@@ -1,11 +1,8 @@
 package com.feedback.website.controllers;
 
 import com.feedback.website.dtos.UserDto;
-import com.feedback.website.mappers.UserMapper;
-import com.feedback.website.repos.UserRepo;
 import com.feedback.website.services.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -15,9 +12,6 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
-    private  final UserRepo userRepo;
-    @Autowired
-    private UserMapper userMapper;
 
     @GetMapping(value = "/all")
     @ResponseBody

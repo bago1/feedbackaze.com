@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -19,11 +18,9 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class UserService {
 
-    @Autowired
-    private UserRepo userRepo;
+    private final UserRepo userRepo;
 
-    @Autowired
-    private UserMapper userMapper;
+    private final UserMapper userMapper;
 
 
     public UserDto getOneUser(int id) {
@@ -49,8 +46,6 @@ public class UserService {
         userRepo.save(userMapper.dtoToEntity(userDto1));
     }
 
-
-
     public List<UserDto> deleteAllUsers() {
          userRepo.deleteAll();
         return listUsers();
@@ -66,7 +61,6 @@ public class UserService {
         if (getOneUser(id) == null) {
             throw new Exception("Not found");
         } else {
-
 
             //is prinsipi - requestden gelen fieldleri yeni object yaradib set edir
             //daha sonra esas entityni db-dan cekir,
