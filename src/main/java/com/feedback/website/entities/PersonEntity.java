@@ -1,23 +1,18 @@
 package com.feedback.website.entities;
 
 
+import javax.persistence.*;
+
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 public class PersonEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
 
     @Column(name = "surname")
     private String surname;
@@ -25,27 +20,7 @@ public class PersonEntity {
     @Column(name = "name")
     private String name;
 
-    public Integer getId() {
-        return id;
-    }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
-    public String getSurname() {
-        return surname;
-    }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }

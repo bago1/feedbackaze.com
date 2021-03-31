@@ -10,8 +10,6 @@ public interface UserMapper {
 
     @Mapping(source = "ad", target = "name")
     @Mapping(source = "soyad", target = "surname")
-    @Mapping(source = "email", target = "email")
-    @Mapping(source = "password", target = "password")
     UserEntity dtoToEntity(UserDto dto);
 
     @Mapping(source = "name", target = "ad")

@@ -1,16 +1,14 @@
 package com.feedback.website.entities;
 
+import java.util.List;
+import javax.persistence.*;
 import lombok.*;
 
-import javax.persistence.*;
-import java.util.List;
-
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 @Table(name = "users")
-@ToString
 public class UserEntity extends PersonEntity {
+
     @Column(name = "email")
     private String email;
 
@@ -19,31 +17,6 @@ public class UserEntity extends PersonEntity {
 
     @OneToMany(mappedBy = "userEntity")
     private List<Comment> comments;
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-
-        this.comments = comments;
-    }
 
 }
 

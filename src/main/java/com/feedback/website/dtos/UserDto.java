@@ -1,22 +1,14 @@
 package com.feedback.website.dtos;
 
 import lombok.*;
-
 import java.util.List;
 
-
-@AllArgsConstructor
-@NoArgsConstructor
 @Data
-@Builder
-@ToString
 public class UserDto {
+    private String ad;
+    private String soyad;
+    private String email;
+    private String password;
+    private List<CommentDto> commentsDto;
 
-    public String ad;
-    public String soyad;
-    public String email;
-    public String password;
-    public List<CommentDto> commentsDto;
-
-//todo niye fieldleri private edib, @getter seetterveya @data yazanda mapping ede bilmir Usermapper interfaesi. Impl fayli yaranmir/ mecbur public edirik
 }
