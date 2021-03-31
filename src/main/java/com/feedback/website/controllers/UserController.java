@@ -1,68 +1,60 @@
 package com.feedback.website.controllers;
 
-import com.feedback.website.models.User;
+import com.feedback.website.dtos.UserDto;
 import com.feedback.website.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-import java.util.Optional;
 
 @RestController
+@RequiredArgsConstructor
+@RequestMapping("users")
 public class UserController {
+    private final UserService userService;
 
-    @Autowired
-    private UserService userService;
-
-    //UserRegister
-    @PostMapping("/users/register")
-    public void registerUser(@RequestBody User user) {//request body post gonderende bodysi olmasi ucun
-        userService.saveUser(user);
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Object> one(@PathVariable Integer id) {
+        UserDto userDto = userService.getOneUser(id);
+        return ResponseEntity.ok(userDto);
     }
 
-    @PutMapping("/users/update")
-    public void updateUser(@RequestBody User user) {
-        userService.saveUser(user);
+    @GetMapping(value = "/")
+    @ResponseBody
+    public ResponseEntity<Object> all() {
+        List<UserDto> all = userService.listUsers();
+        return ResponseEntity.ok(all);
     }
 
-
-    @GetMapping("/user")
-    public Optional<User> getUserById(Integer id) {
-        System.out.println(id);
-        return userService.getById(id);
+    @PostMapping(value = "/")
+    public ResponseEntity<UserDto> newUser(@RequestBody UserDto userDto) {
+        userService.saveUser(userDto);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(userDto);
     }
 
-    @GetMapping("/users")
-    public List<User> getallUsers() {
-        return userService.getAllUsers();
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Object> updateUser(@RequestBody UserDto userDto, @PathVariable Integer id) {
+        userService.updateUser(userDto, id);
+        return ResponseEntity.ok("user id="+id+" updated");
     }
 
-    @DeleteMapping("/user")
-    public void deleteUser(@RequestBody User user){
-        userService.deleteUser(user);
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Object> deleteUser(@PathVariable Integer id) {
+        userService.deleteOneUser(id);
+        return ResponseEntity.ok("user deleted");
     }
 
-    @DeleteMapping("/users")
-    public void deleteUser(){
+    @DeleteMapping(value = "/")
+    @ResponseBody
+    public ResponseEntity<Object> deleteAllUsers() {
         userService.deleteAllUsers();
+        return ResponseEntity.ok("all users deleted");
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }
+
+

@@ -1,4 +1,4 @@
-package com.feedback.website.models;
+package com.feedback.website.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,4 +19,5 @@ public class Target {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
     String name;
+
 }
