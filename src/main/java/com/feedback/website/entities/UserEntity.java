@@ -1,7 +1,6 @@
-package com.feedback.website.models;
+package com.feedback.website.entities;
 
 import lombok.*;
-import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.util.List;
@@ -10,16 +9,15 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "users")
-@Builder
 @ToString
-public class User extends Person {
+public class UserEntity extends PersonEntity {
     @Column(name = "email")
     private String email;
 
     @Column(name = "password")
     private String password;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "userEntity")
     private List<Comment> comments;
 
     public String getEmail() {
@@ -46,7 +44,6 @@ public class User extends Person {
 
         this.comments = comments;
     }
-
 
 }
 

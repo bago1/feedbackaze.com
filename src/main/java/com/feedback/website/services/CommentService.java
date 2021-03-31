@@ -1,6 +1,6 @@
 package com.feedback.website.services;
 
-import com.feedback.website.models.Comment;
+import com.feedback.website.entities.Comment;
 import com.feedback.website.repos.CommentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

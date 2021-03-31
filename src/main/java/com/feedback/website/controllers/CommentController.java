@@ -1,11 +1,8 @@
 package com.feedback.website.controllers;
 
 import com.feedback.website.dtos.CommentDto;
-import com.feedback.website.dtos.UserDto;
 import com.feedback.website.mappers.CommentMapper;
-import com.feedback.website.mappers.UserMapper;
-import com.feedback.website.models.Comment;
-import com.feedback.website.models.User;
+import com.feedback.website.entities.Comment;
 import com.feedback.website.services.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ReflectionUtils;

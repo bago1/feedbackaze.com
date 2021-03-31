@@ -1,15 +1,13 @@
 package com.feedback.website.dtos;
 
 import lombok.*;
-import org.hibernate.annotations.DynamicUpdate;
 
 import java.util.List;
 
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
+@Data
 @Builder
 @ToString
 public class UserDto {

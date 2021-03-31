@@ -1,6 +1,6 @@
 package com.feedback.website.dtos;
 
-import com.feedback.website.models.User;
+import com.feedback.website.entities.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,6 +16,6 @@ public class CommentDto {
     Integer id;
     String commentText;
     Integer targetId;
-    User user;
+    UserEntity userEntity;
 
 }

@@ -1,9 +1,7 @@
-package com.feedback.website.models;
+package com.feedback.website.entities;
 
 
 import lombok.*;
-import lombok.experimental.FieldDefaults;
-import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -14,7 +12,7 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 @AllArgsConstructor
 @NoArgsConstructor
-public class Person {
+public class PersonEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

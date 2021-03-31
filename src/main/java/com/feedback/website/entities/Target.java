@@ -1,7 +1,6 @@
-package com.feedback.website.models;
+package com.feedback.website.entities;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

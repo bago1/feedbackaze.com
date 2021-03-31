@@ -1,7 +1,5 @@
-package com.feedback.website.models;
+package com.feedback.website.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,6 +24,8 @@ public class Comment {
     Integer targetId;
 
     @ManyToOne
-    @JoinColumn(updatable = false,insertable = false)
-    private User user;
+    @JoinColumn(updatable = false, insertable = false)
+    UserEntity userEntity;
+
+
 }
