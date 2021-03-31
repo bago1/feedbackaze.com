@@ -15,20 +15,20 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity one(@PathVariable Integer id) {
+    public ResponseEntity<Object> one(@PathVariable Integer id) {
         UserDto userDto = userService.getOneUser(id);
         return ResponseEntity.ok(userDto);
     }
 
     @GetMapping(value = "/")
     @ResponseBody
-    public ResponseEntity all() {
+    public ResponseEntity<Object> all() {
         List<UserDto> all = userService.listUsers();
         return ResponseEntity.ok(all);
     }
 
     @PostMapping(value = "/")
-    public ResponseEntity newUser(@RequestBody UserDto userDto) {
+    public ResponseEntity<UserDto> newUser(@RequestBody UserDto userDto) {
         userService.saveUser(userDto);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
@@ -36,20 +36,20 @@ public class UserController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity updateUser(@RequestBody UserDto userDto, @PathVariable Integer id) {
+    public ResponseEntity<Object> updateUser(@RequestBody UserDto userDto, @PathVariable Integer id) {
         userService.updateUser(userDto, id);
-        return ResponseEntity.ok(userDto);
+        return ResponseEntity.ok("user id="+id+" updated");
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity deleteUser(@PathVariable Integer id) {
+    public ResponseEntity<Object> deleteUser(@PathVariable Integer id) {
         userService.deleteOneUser(id);
         return ResponseEntity.ok("user deleted");
     }
 
     @DeleteMapping(value = "/")
     @ResponseBody
-    public ResponseEntity deleteAllUsers() {
+    public ResponseEntity<Object> deleteAllUsers() {
         userService.deleteAllUsers();
         return ResponseEntity.ok("all users deleted");
     }

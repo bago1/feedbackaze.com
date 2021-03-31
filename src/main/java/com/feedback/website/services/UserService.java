@@ -9,8 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -34,22 +32,11 @@ public class UserService {
     }
 
     public void saveUser(UserDto userDto) {
-        UserDto userDto1 = UserDto.builder()
-                .email(userDto.getEmail())
-                .password(userDto.getPassword())
-                .ad(userDto.getAd())
-                .soyad(userDto.getSoyad())
-                .build();
-        userRepo.save(userMapper.dtoToEntity(userDto1));
+        userRepo.save(userMapper.dtoToEntity(userDto));
     }
 
-    public ResponseEntity updateUser(UserDto userDto, Integer id) {
+    public void updateUser(UserDto userDto, Integer id) {
         if (userRepo.findById(id).isEmpty()) throw new UserNotFoundException();
-        //is prinsipi - requestden gelen fieldleri yeni object yaradib set edir
-        //daha sonra esas entityni db-dan cekir,
-        //requestden gelen obj-nun yalniz null olmayan fieldlerini esas entity-nin objectine copy edir
-        // esas entityni save edir
-
         //fetch fields as DTO and set to new Entity-type Object. Of course some values will be null
         //then Fetch the main Entity Object by id
         //then copy the only Not-Null fields to main Entity
@@ -58,8 +45,6 @@ public class UserService {
         UserEntity existing = userRepo.findById(id).orElse(null);
         copyNonNullProperties(userEntity, existing);
         userRepo.save(existing);
-
-        return new ResponseEntity("User updated succesfully", HttpStatus.OK);
 
     }
 

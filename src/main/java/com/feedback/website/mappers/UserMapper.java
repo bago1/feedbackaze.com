@@ -2,9 +2,8 @@ package com.feedback.website.mappers;
 
 import com.feedback.website.dtos.UserDto;
 import com.feedback.website.entities.UserEntity;
-import org.mapstruct.*;
-
 import java.util.List;
+import org.mapstruct.*;
 
 @Mapper(componentModel = "spring", uses = CommentMapper.class)
 public interface UserMapper {
@@ -23,10 +22,8 @@ public interface UserMapper {
 
     List<UserEntity> dtoListtoEntityList(List<UserDto> dtoList);
 
-    //todo checkstyle plugin
     //todo maven to gradle
     //todo AOP
-    //todo try catch - message
 
 
 
