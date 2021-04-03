@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -15,16 +16,14 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Object> one(@PathVariable Integer id) {
-        UserDto userDto = userService.getOneUser(id);
-        return ResponseEntity.ok(userDto);
+    public UserDto one(@PathVariable Integer id) {
+        return userService.getOneUser(id);
     }
 
     @GetMapping(value = "/")
     @ResponseBody
-    public ResponseEntity<Object> all() {
-        List<UserDto> all = userService.listUsers();
-        return ResponseEntity.ok(all);
+    public List<UserDto> all() {
+        return userService.listUsers();
     }
 
     @PostMapping(value = "/")
@@ -38,23 +37,29 @@ public class UserController {
     @PutMapping(value = "/{id}")
     public ResponseEntity<Object> updateUser(@RequestBody UserDto userDto, @PathVariable Integer id) {
         userService.updateUser(userDto, id);
-        return ResponseEntity.ok("user id="+id+" updated");
+        return ResponseEntity.ok("user id=" + id + " updated");
     }
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Object> deleteUser(@PathVariable Integer id) {
         userService.deleteOneUser(id);
-        return ResponseEntity.ok("user deleted");
+        return ResponseEntity
+                .status(HttpStatus.NO_CONTENT)
+                .build();
     }
+
 
     @DeleteMapping(value = "/")
     @ResponseBody
     public ResponseEntity<Object> deleteAllUsers() {
         userService.deleteAllUsers();
-        return ResponseEntity.ok("all users deleted");
+        return ResponseEntity
+                .status(HttpStatus.NO_CONTENT)
+                .build();
     }
-
-
+//get ve putda response entity-nin xususiyetlerinden istif elemeye ehtiyac yoxdur, cunki , tapilmayanda 404 qaytarir.
+    //amma post edende bize lazimdir, 201 CREATED kodunu alaq, deletde ise 204 NO CONTENT kodunu alaq. buna gore Response Entiity yazirq. yazmasaq, delete edende 200(Ugurlu) qaytarir. sehv mesajdi
+//get v eput ucun kod yoxdur xususi
 }
 
 
