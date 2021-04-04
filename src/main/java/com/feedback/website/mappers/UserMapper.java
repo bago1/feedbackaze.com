@@ -20,7 +20,7 @@ public interface UserMapper {
 
     List<UserEntity> dtoListtoEntityList(List<UserDto> dtoList);
 
-    //todo maven to gradle
+
     //todo AOP
 
 
