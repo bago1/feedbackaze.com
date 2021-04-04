@@ -1,16 +1,15 @@
 package com.feedback.website.entities;
 
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-
 @Entity
+@Table(name = "comments")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "comments")
 public class Comment {
 
     @Id
