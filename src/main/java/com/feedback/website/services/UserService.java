@@ -5,6 +5,7 @@ import com.feedback.website.exceptions.UserNotFoundException;
 import com.feedback.website.mappers.UserMapper;
 import com.feedback.website.entities.UserEntity;
 import com.feedback.website.repos.UserRepo;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;
@@ -15,9 +16,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@Data
 @Service
 @RequiredArgsConstructor
 public class UserService {
+
+
     private final UserRepo userRepo;
     private final UserMapper userMapper;
 

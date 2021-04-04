@@ -4,6 +4,7 @@ import com.feedback.website.dtos.CommentDto;
 import com.feedback.website.mappers.CommentMapper;
 import com.feedback.website.entities.Comment;
 import com.feedback.website.services.CommentService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.web.bind.annotation.*;
@@ -14,13 +15,12 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
+@RequiredArgsConstructor
 public class CommentController {
 
-    @Autowired
-    CommentService commentService;
+private final     CommentService commentService;
 
-    @Autowired
-    private CommentMapper commentMapper;
+    private final  CommentMapper commentMapper ;
 
     @GetMapping("/comments")
     public List<Comment> getComments(){

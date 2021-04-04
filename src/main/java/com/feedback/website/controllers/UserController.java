@@ -2,6 +2,7 @@ package com.feedback.website.controllers;
 
 import com.feedback.website.dtos.UserDto;
 import com.feedback.website.services.UserService;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,10 +10,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Data
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("users")
 public class UserController {
+
+
+
     private final UserService userService;
 
     @GetMapping(value = "/{id}")
