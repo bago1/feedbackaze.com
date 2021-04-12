@@ -1,0 +1,23 @@
+services :
+  db :
+    image: mysql:5.7
+    restart: always
+    volumes:
+      - db_data_feedback1:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: pass1
+    ports:
+      - 3306:3306
+  adminer :
+    image: adminer
+    restart: always
+    ports:
+      - 8580:8080
+volumes:
+  db_data_feedback1:
+
+#    bir defe hansi volumeye yazilibsa, volume movcuddursa, ondan sonra compose-up elesende refer edir hemin volumedeki parola
+
+#todo nie compose-up-in icinde birbasa projection ozunu run elemeyi yazmiriq ki birde run basiriq?
+#nece edek ki
+
