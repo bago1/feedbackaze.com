@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: &connectionUrl jdbc:mysql://localhost:3306/feedback1?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: pass1
+    initialization-mode: always
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    database: mysql
+    show-sql: true
+
+# - QAN YADDASHI -  jpa-hibernate-ddl-auto -( create)  yazilanda entity claslari varsa onlarin tablelerini yaradir. bezen ola bilerki, biz bunu goturek amma yene orda db-lar qalsin. ona gore ki, mysqlin volumelerinde qalir.hemin o cedvel
+

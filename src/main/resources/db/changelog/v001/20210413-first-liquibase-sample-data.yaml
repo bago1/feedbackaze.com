@@ -1,0 +1,19 @@
+databaseChangeLog:
+  -  changeSet:
+       id:  1
+       author: bago
+       changes:
+         -  createTable:
+              tableName: developers
+              columns:
+                - column:
+                     name:  id
+                     type:  int
+                     autoIncrement:  true
+                     constraints:
+                       primaryKey:  true
+                - column:
+                    name: developer
+                    type: varchar(50)
+
+#todo Nece data.sql-i liquibase ile evezlemek olar? veya buna ehtiyac varmi? Mene lazimdir ki, db yarananda avtomatik 5 user data.sqldeki kimi yaransin
