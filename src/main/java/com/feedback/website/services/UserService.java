@@ -21,12 +21,10 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class UserService {
 
-
     private final UserRepo userRepo;
     private final UserMapper userMapper;
 
     public UserDto getOneUser(int id) {
-
         return userMapper.entityToDto(userRepo.findById(id)
                 .orElseThrow(UserNotFoundException::new));
     }
