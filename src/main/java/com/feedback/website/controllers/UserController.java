@@ -62,8 +62,8 @@ public class UserController {
                 .status(HttpStatus.NO_CONTENT)
                 .build();
     }
-//get ve putda response entity-nin xususiyetlerinden istif elemeye ehtiyac yoxdur, cunki , tapilmayanda 404 qaytarir.
-    //amma post edende bize lazimdir, 201 CREATED kodunu alaq, deletde ise 204 NO CONTENT kodunu alaq. buna gore Response Entiity yazirq. yazmasaq, delete edende 200(Ugurlu) qaytarir. sehv mesajdi
+//get ve putda response entity-nin xususiyetlerinden istif elemeye ehtiyac yoxdur, cunki , tapilmayanda 404 qaytarir
+// amma post edende bize lazimdir, 201 CREATED kodunu alaq, deletde ise 204 NO CONTENT kodunu alaq. buna gore Response Entiity yazirq. yazmasaq, delete edende 200(Ugurlu) qaytarir. sehv mesajdi
 //get v eput ucun kod yoxdur xususi
 
 
