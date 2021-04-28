@@ -18,9 +18,5 @@ public class TargetEntity {
     private Integer id;
     private String name;
 
-    @OneToMany(mappedBy = "targetEntity")
-    private List<Comment> commentList;
-
-
 
 }

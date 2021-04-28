@@ -13,11 +13,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class CommentDto {
-    Integer id;
     String commentText;
-//    Integer targetId;
-    UserEntity userEntity;
     TargetEntity targetEntity;
+    UserEntity userEntity;
+
 }
 
 

@@ -38,16 +38,16 @@ public class TargetController {
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<Object> updateTarget(@RequestBody TargetDto targetDto, @PathVariable int id){
-         targetService.updateUser(targetDto,id);
+         targetService.updateTarget(targetDto,id);
         return ResponseEntity
-                .ok("user id=" + id + " updated");
+                .ok("target id=" + id + " updated");
     }
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Object> deleteTarget(@PathVariable int id){
         targetService.deleteTarget(id);
         return ResponseEntity
-                .ok("user id=" + id + " deleted");
+                .ok("target id=" + id + " deleted");
 
         //todo asagdaki kimi olanda error olmur, kod 204 qaytarir amma bodyye "user" 4 deleted yazmir
 //        return ResponseEntity
