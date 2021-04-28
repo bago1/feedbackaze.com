@@ -2,6 +2,7 @@ package com.feedback.website.services;
 
 import com.feedback.website.dtos.CommentDto;
 import com.feedback.website.entities.CommentEntity;
+import com.feedback.website.exceptions.CommentNotFoundException;
 import com.feedback.website.exceptions.TargetNotFoundException;
 import com.feedback.website.exceptions.UserNotFoundException;
 import com.feedback.website.mappers.CommentMapper;
@@ -24,6 +25,7 @@ public class CommentService {
     private final CommentRepo commentRepo;
     private final TargetRepo targetRepo;
     private final UserRepo userRepo;
+    private  final TargetService targetService;
 
     public List<CommentDto> getAll() {
         return commentMapper.entityListToDtoList(commentRepo.findAll());
@@ -38,8 +40,8 @@ public class CommentService {
         CommentEntity commentEntity = commentMapper.dtoToEntity(commentDto);
 
         commentEntity.setTargetEntity(targetRepo.findById(id).orElseThrow(TargetNotFoundException::new));
-        if(!userRepo.findById(commentEntity.getUserEntity().getId()).isPresent()){
-         throw new UserNotFoundException();
+        if (!userRepo.findById(commentEntity.getUserEntity().getId()).isPresent()) {
+            throw new UserNotFoundException();
         }
         commentEntity.setUserEntity(commentEntity.getUserEntity());
 
@@ -49,17 +51,41 @@ public class CommentService {
     }
 
 
-    public void updateComment(int id, Map<Object, Object> fields) {
-        CommentEntity myCommentEntity = commentRepo.findById(id).get();
-        fields.forEach((key, value) -> {
-            Field field = ReflectionUtils.findField(CommentEntity.class, (String) key);
-            field.setAccessible(true);
-            ReflectionUtils.setField(field, myCommentEntity, value);
-        });
+//    public void updateComment(int id, Map<Object, Object> fields) {
+//        CommentEntity myCommentEntity = commentRepo.findById(id).get();
+//        fields.forEach((key, value) -> {
+//            Field field = ReflectionUtils.findField(CommentEntity.class, (String) key);
+//            field.setAccessible(true);
+//            ReflectionUtils.setField(field, myCommentEntity, value);
+//        });
+//
+//        commentRepo.save(myCommentEntity);
+//    }
 
-        commentRepo.save(myCommentEntity);
+//    public void updateComment(int id, Map<Object, Object> fields) {
+//        CommentEntity myCommentEntity = commentRepo.findById(id).get();
+//        fields.forEach((key, value) -> {
+//            Field field = ReflectionUtils.findField(CommentEntity.class, (String) key);
+//            field.setAccessible(true);
+//            ReflectionUtils.setField(field, myCommentEntity, value);
+//        });
+//
+//        commentRepo.save(myCommentEntity);
+//    }
+
+
+    public void updateComment(Integer id, CommentDto commentDto) {
+        CommentEntity existing =  commentRepo.findById(id).orElseThrow(CommentNotFoundException::new);
+        CommentEntity newComer =  commentMapper.dtoToEntity(commentDto);
+        //todo orda qalidm ki, commenti update edende, evvelce baxmaliyiq ki,
+        // onunn targeti varmi. varsa hemin targeti tapmaliyiq, yoxsa deyecek ki, get evvelce targeti yarat
+        existing.setCommentText(newComer.getCommentText());
+        existing.setTargetEntity(newComer.getTargetEntity());
+
+      //  existing.setUserEntity(newComer.getUserEntity());
+
+        commentRepo.save(existing);
     }
-
 
     public void deleteComment(Integer id) {
         commentRepo.deleteById(id);
@@ -68,4 +94,6 @@ public class CommentService {
     public void deleteAllComments() {
         commentRepo.deleteAll();
     }
+
+
 }

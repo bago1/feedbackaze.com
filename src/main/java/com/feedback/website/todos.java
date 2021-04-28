@@ -7,5 +7,5 @@ public class todos {
 //todo get comment edende userin ve targetin id-lerini gaytarmasin
 //todo comment yaradanda user secsi , yoxdursa user yaratsin
 //todo unit test add - comment post edende , eger user yoxdursa usernotfound exception throw edilmesi.
-
+//todo commentin putunu duzelt.
 

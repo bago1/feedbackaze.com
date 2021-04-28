@@ -42,9 +42,11 @@ public class CommentController {
     }
 
     @PutMapping("/comments/{id}")
-    public ResponseEntity<Object> updateComment(@PathVariable Integer id, @RequestBody Map<Object, Object> fields) {
+    public ResponseEntity<Object> updateComment(@PathVariable int id, @RequestBody CommentDto commentDto) {
 
-        commentService.updateComment(id, fields);
+        System.out.println("gelen dto "+commentDto.toString());
+
+        commentService.updateComment(id, commentDto);
         return ResponseEntity.ok("Comment " + id + " updated");
     }
 
