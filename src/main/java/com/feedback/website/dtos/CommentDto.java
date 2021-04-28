@@ -16,7 +16,6 @@ public class CommentDto {
     String commentText;
     TargetEntity targetEntity;
     UserEntity userEntity;
-
 }
 
 
