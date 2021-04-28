@@ -14,8 +14,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class CommentDto {
     String commentText;
-    TargetEntity targetEntity;
-    UserEntity userEntity;
+    TargetEntity target;
+    UserEntity user;
 }
 
 
