@@ -15,8 +15,7 @@ public class UserEntity extends PersonEntity {
     @Column(name = "password")
     private String password;
 
-    @OneToMany(mappedBy = "userEntity")
-    private List<Comment> comments;
+
 
 }
 

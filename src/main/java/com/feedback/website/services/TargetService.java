@@ -33,17 +33,13 @@ public class TargetService {
         return targetMapper.entityListToDtoList(targetRepo.findAll());
     }
 
-    public void updateUser(TargetDto targetDto, int id) {
+    public void updateTarget(TargetDto targetDto, int id) {
 
         TargetEntity existingEntity = targetRepo.findById(id).orElseThrow(TargetNotFoundException::new);
         TargetEntity newEntity = targetMapper.dtoToEntity(targetDto);
         existingEntity.setName(newEntity.getName());
         targetRepo.save(existingEntity);
-        //        Optional<TargetEntity> targetEntity =  targetRepo.findById(id);
-//
-//        targetEntity.get().setName("orxan2");
-//        targetRepo.save(targetEntity.get());
-        //todo bu s extends t temasi nedir  https://stackoverflow.com/questions/41960743/what-does-it-mean-s-extends-t-save-s-entity-in-spring-repository
+
     }
 
 

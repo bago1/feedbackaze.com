@@ -1,5 +1,6 @@
 package com.feedback.website.dtos;
 
+import com.feedback.website.entities.TargetEntity;
 import com.feedback.website.entities.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,8 +13,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class CommentDto {
-    Integer id;
     String commentText;
-    Integer targetId;
+    TargetEntity targetEntity;
     UserEntity userEntity;
+
 }
+
+
+
+
