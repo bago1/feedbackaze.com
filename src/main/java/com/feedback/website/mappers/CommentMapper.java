@@ -12,6 +12,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface CommentMapper {
 
+    @Mapping(source = "user", target = "userEntity")
     CommentEntity dtoToEntity(CommentDto dto);
 
     @Mapping(source = "targetEntity", target = "target")
