@@ -10,6 +10,7 @@ import com.feedback.website.repos.CommentRepo;
 import com.feedback.website.repos.TargetRepo;
 import com.feedback.website.repos.UserRepo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
 
@@ -25,7 +26,9 @@ public class CommentService {
     private final CommentRepo commentRepo;
     private final TargetRepo targetRepo;
     private final UserRepo userRepo;
-    private  final TargetService targetService;
+
+    @Autowired
+    TargetService targetService;
 
     public List<CommentDto> getAll() {
         return commentMapper.entityListToDtoList(commentRepo.findAll());
@@ -50,44 +53,15 @@ public class CommentService {
         commentRepo.save(commentEntity);
     }
 
-
-//    public void updateComment(int id, Map<Object, Object> fields) {
-//        CommentEntity myCommentEntity = commentRepo.findById(id).get();
-//        fields.forEach((key, value) -> {
-//            Field field = ReflectionUtils.findField(CommentEntity.class, (String) key);
-//            field.setAccessible(true);
-//            ReflectionUtils.setField(field, myCommentEntity, value);
-//        });
-//
-//        commentRepo.save(myCommentEntity);
-//    }
-
-//    public void updateComment(int id, Map<Object, Object> fields) {
-//        CommentEntity myCommentEntity = commentRepo.findById(id).get();
-//        fields.forEach((key, value) -> {
-//            Field field = ReflectionUtils.findField(CommentEntity.class, (String) key);
-//            field.setAccessible(true);
-//            ReflectionUtils.setField(field, myCommentEntity, value);
-//        });
-//
-//        commentRepo.save(myCommentEntity);
-//    }
-
-
     public void updateComment(Integer id, CommentDto commentDto) {
         CommentEntity existing =  commentRepo.findById(id).orElseThrow(CommentNotFoundException::new);
         CommentEntity newComer =  commentMapper.dtoToEntity(commentDto);
-        //todo orda qalidm ki, commenti update edende, evvelce baxmaliyiq ki,
-        // onunn targeti varmi. varsa hemin targeti tapmaliyiq, yoxsa deyecek ki, get evvelce targeti yarat
         existing.setCommentText(newComer.getCommentText());
-        existing.setTargetEntity(newComer.getTargetEntity());
-
-      //  existing.setUserEntity(newComer.getUserEntity());
-
         commentRepo.save(existing);
     }
 
     public void deleteComment(Integer id) {
+        commentRepo.findById(id).orElseThrow(CommentNotFoundException::new);
         commentRepo.deleteById(id);
     }
 
@@ -96,4 +70,12 @@ public class CommentService {
     }
 
 
+    public void deleteAllCommentsByTargetId(int id) {
+        commentRepo.deleteAllCommentsByTargetEntityId(id);
+    }
+
+    public void deleteAllCommentsByUserId(int id) {
+        commentRepo.deleteAllCommentsByUserEntityId(id);
+
+    }
 }
