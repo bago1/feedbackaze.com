@@ -19,6 +19,7 @@ public class TargetService {
 
     private final TargetRepo targetRepo;
     private final TargetMapper targetMapper;
+    private final CommentService commentService;
 
 
     public void saveTarget(TargetDto targetDto) {
@@ -45,6 +46,7 @@ public class TargetService {
 
     public void deleteTarget(int id) {
         targetRepo.findById(id).orElseThrow(TargetNotFoundException::new);
+        commentService.deleteAllCommentsByTargetId(id);
         targetRepo.deleteById(id);}
 
     public void deleteAllTargets() {

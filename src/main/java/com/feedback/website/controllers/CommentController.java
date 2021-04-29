@@ -24,12 +24,12 @@ public class CommentController {
 
 
     @GetMapping("/comments/{id}")
-    public Optional<CommentEntity> one(@PathVariable Integer id) {
+    public CommentDto one(@PathVariable Integer id) {
         return commentService.findById(id);
     }
 
     @GetMapping("/comments")
-    public List<CommentEntity> all() {
+    public List<CommentDto> all() {
         return commentService.getAll();
     }
 
@@ -42,9 +42,11 @@ public class CommentController {
     }
 
     @PutMapping("/comments/{id}")
-    public ResponseEntity<Object> updateComment(@PathVariable Integer id, @RequestBody Map<Object, Object> fields) {
+    public ResponseEntity<Object> updateComment(@PathVariable int id, @RequestBody CommentDto commentDto) {
 
-        commentService.updateComment(id, fields);
+        System.out.println("gelen dto "+commentDto.toString());
+
+        commentService.updateComment(id, commentDto);
         return ResponseEntity.ok("Comment " + id + " updated");
     }
 
@@ -65,19 +67,4 @@ public class CommentController {
                 .build();
     }
 
-
-    /*User based comments */
-    @GetMapping("/comments/{id}/user")
-    public CommentDto getUserOfComment(@PathVariable Integer id) {
-
-
-        Optional<CommentEntity> comment = commentService.findById(id);
-
-        if (comment.isPresent()) {
-            CommentEntity newCommentEntity = comment.get();
-            return commentMapper.entityToDto(newCommentEntity);
-
-        }
-        return null;
-    }
 }

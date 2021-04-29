@@ -5,7 +5,7 @@ import com.feedback.website.entities.UserEntity;
 import java.util.List;
 import org.mapstruct.*;
 
-@Mapper(componentModel = "spring", uses = CommentMapper.class)
+@Mapper(componentModel = "spring")
 public interface UserMapper {
 
     @Mapping(source = "ad", target = "name")
